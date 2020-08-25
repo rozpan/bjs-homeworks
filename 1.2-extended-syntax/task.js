@@ -33,7 +33,14 @@ function getAverageMark(marks) {
  
     if (marks.length == 0) {
         averageMark = 0;
+        return 0;
     }
+    else if (marks.length > 5) {
+        console.log ("слишком много оценок: " + marks.length);
+        marks.splice(5); 
+    }
+
+    /*
     else { 
         if (marks.length > 5) {
             console.log ("слишком много оценок: " + marks.length);
@@ -45,6 +52,13 @@ function getAverageMark(marks) {
         } 
         averageMark = sumRatings / numberRatings;  
     } 
+    */
+    
+    numberRatings = marks.length;
+    for (let i = 0; i < marks.length; i++) {
+        sumRatings += marks[i]; 
+    } 
+    averageMark = sumRatings / numberRatings;   
     return averageMark;
 }
 
