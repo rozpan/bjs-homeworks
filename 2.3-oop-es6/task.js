@@ -1,6 +1,5 @@
 
 class PrintEditionItem {
-<<<<<<< HEAD
     constructor(name, releaseDate, pagesCount, state = 100) {
         this.name = name;
         this.releaseDate = releaseDate;
@@ -106,83 +105,8 @@ library.addBook(new FantasticBook("Аркадий и Борис Стругацк
 library.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
 library.addBook(new Magazine("Мурзилка", 1924, 60));
 
-console.log(library.findBookBy("name", "Властелин колец")); //null
-console.log(library.findBookBy("releaseDate", 1924).name); //"Мурзилка"
+console.log(library.findBookBy("name", "Властелин колец")); 
+console.log(library.findBookBy("releaseDate", 1895).name); 
 
-console.log("Количество книг до выдачи: " + library.books.length); //Количество книг до выдачи: 4
-library.giveBookByName("Машина времени");
+console.log("Количество книг до выдачи: " + library.books.length); 
 console.log("Количество книг после выдачи: " + library.books.length);
-=======
-	constructor(name, releaseDate, pagesCount, state = 100) {
-		this.name = name;
-		this.releaseDate = releaseDate;
-		this.pagesCount = pagesCount;
-		this.state = state;
-		this.type = null;
-	}
-
- 	fix() {
-		this.state = this.state * 1.5;
-	}
-		
-	set state (newState) {
-		if (newState < 0) {
-			this._state = 0;
-			}
-		else if (newState > 100) {
-			this._state = 100;
-		}
-		else {
-			this._state = newState;
-		}
-	}
-	get state() {
-    	return this._state;
-	} 
-}
-
-
-
-
-class Magazine extends PrintEditionItem {
-	constructor(name, releaseDate, pagesCount, state) {
-		super(name, releaseDate, pagesCount, state)
-		this.type = "magazine";
-	}
-}
-
-class Book extends PrintEditionItem {
-		constructor(author, name, releaseDate, pagesCount, state) {
-		super(name, releaseDate, pagesCount, state)
-		this.type = "book";
-		this.author = author;
-	}
-}
-
-
-class FantasticBook extends Book {
-	constructor(author, name, releaseDate, pagesCount, state) {
-		super(author, name, releaseDate, pagesCount, state)
-		this.type = "fantastic";
-	}
-}
-class NovelBook extends Book {
-	constructor(author, name, releaseDate, pagesCount, state) {
-		super(author, name, releaseDate, pagesCount, state)
-		this.type = "novel";
-	}
-}
-class detective extends Book {
-	constructor(author, name, releaseDate, pagesCount, state) {
-		super(author, name, releaseDate, pagesCount, state)
-		this.type = "detective";
-	}
-}
-
-
-
-
-	
-
-
->>>>>>> 259cb4374c78b63cc7bea209639913b9516b67ca
