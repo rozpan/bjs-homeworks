@@ -15,12 +15,10 @@
 			return parseCount(a); 
 		}
 		catch(notNumberError) {
-			return notNumberError.message;
+			return notNumberError;
 		}
 	}
 	
-    
-  
 
 //задача_2_доработка
 
@@ -57,7 +55,15 @@
 		}
 		catch {
 			return new TriangleFalse();
-		}		
+		}
+
+			//вариант преподавателя
+			/*
+			return {
+				getArea: () => "Ошибка! Неправильный треугольник",
+				getPerimeter: () => "Ошибка! Неправильный треугольник"
+			  }
+			  */		
 	}
 
 
