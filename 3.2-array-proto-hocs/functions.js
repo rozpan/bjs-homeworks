@@ -11,55 +11,58 @@ console.table(weapons);
 
 //----------------------------------------------------
 //1. ф-я getNames возвращает имена всех оружий
-//вариант_1
 function getNames(n) {
-	return n.name;
+	const arName = n.map(number => number.name);
+	return arName;
 }
-console.log(weapons.map(getNames));
-//вариант_2
-weapons.forEach(n => console.log(n.name));
+getNames(weapons);
+
 
 //----------------------------------------------------
-//2. ф-я getCountReliableWeapons возвращает количество
-function inside(n) {
-	function getCountReliableWeapons(number) {
-		if (number < n.durability) {
-			return n;
-		}
-	}
-	return getCountReliableWeapons(600);
+//2. ф-я getCountReliableWeapons возвращает количество оружий
+function getCountReliableWeapons(pr) {
+	const result = weapons.filter(n => {
+		if (pr < n.durability) {
+			return n.durability
+		} 
+	});
+	return result.length;
 }
-console.log(weapons.filter(inside).length);
+getCountReliableWeapons(100);
+
 
 //----------------------------------------------------
 //3. ф-я hasReliableWeapons возвращает правду/ложь
-function inside_(n) {
-	function hasCountReliableWeapons(number) {
-		if (number < n.durability) {
-			return n;
+function hasCountReliableWeapons(pr) {
+	const result = weapons.some(n => {
+		if (pr < n.durability) {
+			return true;
 		}
-	}
-	return hasCountReliableWeapons(900);
+	});
+	return result;
 }
-console.log(weapons.some(inside_));
+hasCountReliableWeapons(950);
+
 
 //----------------------------------------------------
 //4. ф-я getReliableWeaponsNames возвращает имена
-function inside__(n) {
-	function getReliableWeaponsNames(number) {
-		if(number < n.durability) {
+function getReliableWeaponsNames(pr) {
+	const result = weapons.filter(n => {
+		if (pr < n.durability) {
 			return n.name;
 		}
-	}
-	return getReliableWeaponsNames(250); 
+	})
+	.map(n => n.name);
+	return result;
 }
-console.log(weapons.map(inside__).filter(number => number !== undefined));
+getReliableWeaponsNames(250);
+
 
 //----------------------------------------------------
 //5. getTotalDamage возвращает сумму урона всех оружий
-let totalDamage = 0;
-function getTotalDamage(n) {
-	totalDamage += n.range;
-	return totalDamage;
+function getTotalDamage() {
+	let totalDamage = 0;
+	const result = (weapons.map(n => totalDamage += n.range).reverse())[0];
+	return result;
 }
-console.log(((weapons.map(getTotalDamage)).reverse())[0]);
+getTotalDamage();
