@@ -7,13 +7,12 @@ const weapons = [
     new LongBow(), 
     new Bow()
 ];
-console.table(weapons);
+//console.table(weapons);
 
 //----------------------------------------------------
 //1. ф-я getNames возвращает имена всех оружий
 function getNames(n) {
-	const arName = n.map(number => number.name);
-	return arName;
+	return n.map(number => number.name);
 }
 getNames(weapons);
 
@@ -21,12 +20,7 @@ getNames(weapons);
 //----------------------------------------------------
 //2. ф-я getCountReliableWeapons возвращает количество оружий
 function getCountReliableWeapons(pr) {
-	const result = weapons.filter(n => {
-		if (pr < n.durability) {
-			return n.durability
-		} 
-	});
-	return result.length;
+	return weapons.filter(n => pr < n.durability).length;
 }
 getCountReliableWeapons(100);
 
@@ -34,12 +28,7 @@ getCountReliableWeapons(100);
 //----------------------------------------------------
 //3. ф-я hasReliableWeapons возвращает правду/ложь
 function hasCountReliableWeapons(pr) {
-	const result = weapons.some(n => {
-		if (pr < n.durability) {
-			return true;
-		}
-	});
-	return result;
+	return weapons.some(n => pr < n.durability);
 }
 hasCountReliableWeapons(950);
 
@@ -47,13 +36,8 @@ hasCountReliableWeapons(950);
 //----------------------------------------------------
 //4. ф-я getReliableWeaponsNames возвращает имена
 function getReliableWeaponsNames(pr) {
-	const result = weapons.filter(n => {
-		if (pr < n.durability) {
-			return n.name;
-		}
-	})
+	return weapons.filter(n => pr < n.durability)
 	.map(n => n.name);
-	return result;
 }
 getReliableWeaponsNames(250);
 
@@ -61,8 +45,6 @@ getReliableWeaponsNames(250);
 //----------------------------------------------------
 //5. getTotalDamage возвращает сумму урона всех оружий
 function getTotalDamage() {
-	let totalDamage = 0;
-	const result = (weapons.map(n => totalDamage += n.range).reverse())[0];
-	return result;
+	return weapons.reduce((sum, n) => sum + n.attack, 0);
 }
 getTotalDamage();
