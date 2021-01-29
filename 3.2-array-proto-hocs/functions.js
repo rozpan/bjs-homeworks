@@ -56,52 +56,37 @@ getTotalDamage();
 
 
 //задание_2
+//исправления Владимира Чебукина
 function compareArrays (a, b) {
-	function f(n, i) {
-		return n === b[i];
-	}
-	if ((a.length === b.length) && (a.every(f))) {
-	 	return true;
-	}
-	else {
-		return false;
-	}
+	return (a.length === b.length) && (a.every((n, i) => n === b[i]));
 }
 function sleep(milliseconds) {
-	let e = new Date().getTime() + milliseconds;
-	while (new Date().getTime() <= e) {}
+	let delay = new Date().getTime() + milliseconds;
+	while (new Date().getTime() <= delay) {}
 }
-function sum(...args) {
+function sum(...ar) {
 	sleep(100); 
-	/* вычисления суммы пока не нужны...
-	return args.reduce((sum, arg) => {
-	  return sum + arg;
+	return ar.reduce((sum, ar) => {
+	  return sum + ar;
 	}, 0);
-	*/
-	return [...args]; 
-  }
+}
 
 function memorize(fn, limit) {
-	const memory = [
-		{
-		  args: [3, 4],
-		  result: 7
-		},
-		{
-		args: [1, 3],
-		result: 4
-		} 
-	];
+	const memory = [];
 
-	return function bar (a, b) { 
-		if (memory.find(El => compareArrays(El.args, fn(a, b)))) {
-			return (memory.find(El => compareArrays(El.args, fn(a, b)))).result;
+	return function(a, b, ...ar) { 
+		const argFn = () => [a, b, ...ar];
+		const comparison = memory.find(el => compareArrays(el.args, argFn()));
+		if (comparison) {
+			return comparison.result;
 		}
 		else {
-			memory.push({args: fn(a, b)});
-			return memory;
+			memory.push({args: ([a, b, ...ar]), result: fn(a, b, ...ar)});
+			//console.table(memory);
+			return fn(a, b, ...ar);
 		}
 	}
 }
 const mSum = memorize(sum, 5);
-console.log(mSum(1, 3)); 
+console.log(mSum(1, 4));
+console.log(mSum(3, 4));
