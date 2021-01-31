@@ -56,37 +56,37 @@ getTotalDamage();
 
 
 //задание_2
-//исправления Владимира Чебукина
+//исправления Владимира Чебукина_часть2
 function compareArrays (a, b) {
-	return (a.length === b.length) && (a.every((n, i) => n === b[i]));
+	return a.length === b.length && a.every((n, i) => n === b[i]);
 }
 function sleep(milliseconds) {
 	let delay = new Date().getTime() + milliseconds;
 	while (new Date().getTime() <= delay) {}
 }
-function sum(...ar) {
+function sum(...theArgs) {
 	sleep(100); 
-	return ar.reduce((sum, ar) => {
-	  return sum + ar;
+	return theArgs.reduce((sum, theArgs) => {
+	  return sum + theArgs;
 	}, 0);
 }
 
 function memorize(fn, limit) {
 	const memory = [];
-
-	return function(a, b, ...ar) { 
-		const argFn = () => [a, b, ...ar];
-		const comparison = memory.find(el => compareArrays(el.args, argFn()));
+	return function(...theArgs) { 
+		const comparison = memory.find(el => compareArrays(el.args, [...theArgs]));
 		if (comparison) {
 			return comparison.result;
 		}
-		else {
-			memory.push({args: ([a, b, ...ar]), result: fn(a, b, ...ar)});
-			//console.table(memory);
-			return fn(a, b, ...ar);
+		memory.push({args: ([...theArgs]), result: fn(...theArgs)});
+		if (memory.length > limit) {
+			memory.shift();
 		}
+		return fn(...theArgs);
 	}
 }
-const mSum = memorize(sum, 5);
+const mSum = memorize(sum, 2);
 console.log(mSum(1, 4));
 console.log(mSum(3, 4));
+console.log(mSum(6, 4));
+console.log(mSum(8, 4));
