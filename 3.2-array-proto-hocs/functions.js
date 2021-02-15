@@ -56,7 +56,6 @@ getTotalDamage();
 
 
 //задание_2
-//исправления Владимира Чебукина_часть2
 function compareArrays (a, b) {
 	return a.length === b.length && a.every((n, i) => n === b[i]);
 }
@@ -74,15 +73,16 @@ function sum(...theArgs) {
 function memorize(fn, limit) {
 	const memory = [];
 	return function(...theArgs) { 
-		const comparison = memory.find(el => compareArrays(el.args, [...theArgs]));
+		const comparison = memory.find(el => compareArrays(el.args, theArgs));
 		if (comparison) {
 			return comparison.result;
 		}
-		memory.push({args: ([...theArgs]), result: fn(...theArgs)});
+		const funcResult = fn(...theArgs);
+		memory.push({args: theArgs, result: funcResult});
 		if (memory.length > limit) {
 			memory.shift();
 		}
-		return fn(...theArgs);
+		return funcResult;
 	}
 }
 const mSum = memorize(sum, 2);
